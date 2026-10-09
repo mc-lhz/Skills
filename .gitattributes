@@ -1,0 +1,20 @@
+# 仓库内统一存 LF，工作区也保持 LF，
+# 避免 shell 脚本（bin/preview、bin/verifier、*.sh）在 Unix 上因 CRLF 失效。
+* text=auto eol=lf
+
+# 二进制，不做行尾处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.docx binary
+*.pptx binary
+*.xlsx binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary

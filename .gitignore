@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+
+# 渲染/预览过程产物
+_shots/
+_pptx_shots/
+.preview/
+*.log
+
+# 编辑器与系统
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.orig
+*~
