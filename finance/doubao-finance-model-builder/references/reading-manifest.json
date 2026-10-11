@@ -16,18 +16,18 @@
   "market_value": [
     "references/equity-evidence-acquisition.md"
   ],
-  "external_required": {
-    "financial_spreadsheet": [
-      {
-        "skill": "sheet",
-        "path": "SKILL.md"
-      },
-      {
-        "skill": "sheet",
-        "path": "references/ref-financial-modeling-standards"
-      }
-    ]
-  },
+    "external_required": {
+      "financial_spreadsheet": [
+        {
+          "skill": "lark/sheet",
+          "path": "SUBSKILL.md"
+        },
+        {
+          "skill": "lark/sheet",
+          "path": "references/ref-financial-modeling-standards"
+        }
+      ]
+    },
   "workflows": {
     "three_statements": {
       "required": [

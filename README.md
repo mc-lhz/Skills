@@ -1,65 +1,95 @@
 # Skills
 
-106 个 Agent Skill，按功能分为 15 个目录。多数源自豆包（ByteDance）办公环境导出。
+Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按功能分域组织。
 
-## 结构
+**当前 64 个可加载技能**（`SKILL.md`），其中 8 个是把纯知识型子技能合并后的域根技能。
 
-| 目录 | 数量 | 说明 |
+## 合并后的域根技能（8 个）
+
+每个域根 `SKILL.md` 只写子技能索引与路径基准，子技能整体下沉到 `references/<子技能名>/`，
+入口文件为 `SUBSKILL.md`。这样宿主不会把子技能重复加载为独立技能。
+
+| 域根 | 子技能数 | 领域 |
 |---|---|---|
-| `lark/` | 20 | 飞书协作，依赖 [`larksuite/cli`](https://github.com/larksuite/cli)（`lark-cli`） |
-| `platform-doubao/` | 15 | 豆包宿主专用，**在豆包外无法运行**（见下） |
-| `finance/` | 11 | 金融投资与财报分析 |
-| `marketing/` | 9 | 营销、电商运营、舆情 |
-| `academic/` | 7 | 论文写作、文献调研、投稿审查 |
-| `content/` | 7 | 长文档、小说、新媒体、多平台改写 |
-| `medical/` | 7 | 医学循证、文献检索与解读 |
-| `legal/` | 7 | 合同、专利、DPA、合规审计 |
-| `media/` | 7 | 图像/视频/音频生成与视频提取 |
-| `product/` | 5 | PRD、竞品分析、QA、用户研究、游戏策划 |
-| `tooling/` | 4 | 产物预览校验、Skill 创建、PC 优化 |
+| `academic/` | 7 | 论文写作、文献调研、评审、精读、参考文献、基金提案、批判阅读 |
+| `content/` | 7 | 长文档、小说、新媒体、多平台改写、标题日历、去 AI 味、跨境内容 |
+| `finance/` | 10 | 上市公司/非上市公司分析、选股、日报、财报、公告、行业、热点、财富规划、多股对比 |
+| `legal/` | 6 | 合同起草/审查/修订、DPA、专利、合规评估 |
+| `marketing/` | 9 | 营销策划、电商提案、商品内容、选品、客服、舆情、Listing、跨境合规、素材审核 |
+| `medical/` | 7 | 患者咨询、临床决策、文献检索/解读/翻译/跟踪、报告解读 |
+| `product/` | 5 | 产品经理、产品分析、QA、用户研究、游戏策划 |
 | `data/` | 2 | 业务数据分析、可视化 |
-| `documents/` | 2 | PDF 处理、期刊排版 |
-| `web-dev/` | 2 | 单页 HTML、全栈应用开发 |
-| `lifestyle/` | 1 | 旅游/健身/美食/游戏攻略路由 |
 
-合计 106 个技能目录、133 个 `SKILL.md`（含各技能内部 `references/`、`sub-skills/`），约 33 MB。
+合并后全库 `SKILL.md` 由 106 降至 64。
 
-## 运行依赖
+## 合并范围与判定
 
-**通用（约 40 个）** — 只需 Python 3.10+ 与常规 pip 包（`python-docx`、`openpyxl`、`lxml`、`Pillow`、`PyMuPDF`）。
+只合并**与编码、工具调用都无关**的纯知识型技能：运行时不需要外部 CLI、正文不含
+`lark-cli`/`mediakit-cli`/`computer_use_tool` 等调用指令。判定方式是扫描每个技能
+全部文件里的工具名出现次数，为 0 才纳入。
 
-**需 `lark-cli`（`lark/` 全部 20 个）** — 公开 MIT 项目，`npx @larksuite/cli@latest install` 或直接下载 Releases 的预编译二进制（Go 实现，运行期不需要 Node）。其中 `lark-whiteboard` 额外依赖纯 Node 的 `@larksuite/whiteboard-cli`。
+金融与医疗虽在最终名单内，但两者的检索入口（`seed_finance_search`、医学数据库）
+依赖宿主工具。已保留其方法论，检索段落在子技能内部自行处理。
 
-**豆包环境专用（`platform-doubao/` 全部 15 个）** — 依赖宿主注入的私有工具，无法在外部复现：
+## 未合并
 
-| 依赖 | 涉及技能 |
-|---|---|
-| `mediakit-cli`（字节内部，npm 未发布） | `byted-mediakit-*` × 5 |
-| `computer_use_tool` / bu plane | `browser-use-automation` × 2、`browser-task` |
-| 豆包内置工具 | `doubao-enterprise-search` `cron-scheduler` `record` `identity`、`gift-card-redemption`、`student-discount-application`、`doubao-oceanengine-adops-agent` |
+| 域 | 数量 | 原因 |
+|---|---|---|
+| `lark/` | 20 | 依赖 `lark-cli`，且是产物载体 |
+| `platform-doubao/` | 15 | 依赖豆包私有工具，豆包外不可运行 |
+| `media/` | 7 | 依赖豆包生图/生视频/生音频工具 |
+| `documents/` | 2 | 产物载体 |
+| `tooling/` | 3 | CLI 封装或元技能 |
+| `web-dev/` | 2 | 产物载体 |
+| `lifestyle/` | 1 | 自身已是多分支结构 |
 
-`ppt` 另可选调用 `mediakit-cli` 做图片去背景（效率优先时可降级用原图）。
+## 两个独立保留的重资产
 
-## 使用
+- `finance/doubao-finance-model-builder/` — 116 文件、1190 KB、51 个脚本。若并进 `finance`
+  会带来校验器跨模式误触发风险，且体积翻倍。
+- `legal/doubao-personal-info-audit/` — 69 文件、453 KB、10 个校验脚本。同理。
 
-这些是标准 Skill 目录，把仓库路径加入宿主的 skill 搜索路径即可，例如 opencode：
+两者仍是独立可加载技能，各自保留 `SKILL.md`。
 
-```json
-{ "skills": { "paths": ["C:\\path\\to\\Skills"] } }
+## 目录结构示例
+
+```
+medical/
+├── SKILL.md                          ← 域根：系统提示 + 子技能索引
+└── references/
+    ├── doubao-answer-with-medical-evidence/
+    │   ├── SUBSKILL.md
+    │   ├── references/
+    │   └── scripts/
+    ├── doubao-clinical-decision-support/
+    └── ...
 ```
 
-Skill 由 `SKILL.md` frontmatter 的 `name` + `description` 触发，宿主仅扫 `**/SKILL.md`。
+子技能内部的相对路径仍以它自己所在的 `references/<子技能名>/` 为基准解析——
+整棵子树一起搬迁，解析基准未变，无需改写。域根 `SKILL.md` 用
+`<system-reminder>` 块把这条规则显式锁定，并规定从域根调用脚本时必须写完整前缀。
 
-## 已知缺失
+## 合并时的三处连带修改
 
-`tooling/artifact-preview/` 只有 `bin/` 与 `lib/`（代码部分），其顶层 `SKILL.md`、`README.md`、`requirements.txt` 在上游导出包中即已缺失，未能恢复。因此该目录不构成可被宿主加载的完整 Skill。
+1. **77 个 `SKILL.md` → `SUBSKILL.md`**（53 顶层 + 24 嵌套），并改写 90 个文件里 212 处引用。
+   不改的话宿主会把子技能重复加载为独立技能。
+2. **`content/…/scripts/quality/machine-quality-engine.mjs`** 真实读取
+   `path.join(bundleRoot, 'SKILL.md')`，已同步改为 `SUBSKILL.md`。
+3. **`finance/doubao-finance-model-builder`** 原引用 `sheet/SKILL.md`，已改为
+   `lark/sheet/SUBSKILL.md`（含 `reading-manifest.json`、校验器与测试）。
+
+## 已知问题
+
+- `content/references/doubao-book-writer/sub-skills/project-intake/SUBSKILL.md` 与
+  `references/intake-routing.md` 引用 `../../../references/checklist-schema.md`，
+  实际应为 `../../references/...`。**上游即存在此笔误**，非本次合并引入，未修改。
 
 ## 许可
 
-**未统一授权，推送公开仓库前需先确认。** 现状：
+未统一授权。`byted-mediakit-*` 声明 MIT；`tooling/artifact-preview`、`tooling/verifier-hub`
+声明 Proprietary — internal use only；其余多数未声明 license。作为公开仓库前需确认。
 
-- 5 个 `byted-mediakit-*` 声明 MIT
-- 2 个声明 **Proprietary — internal use only**：`tooling/artifact-preview`、`tooling/verifier-hub`
-- 其余 99 个未声明 license
+## 已知缺失
 
-技能由第三方环境导出，多数未附授权条款，默认视为保留全部权利。若本仓库为公开仓库，建议移除这两个 Proprietary 技能，或取得来源方书面许可。
+`tooling/artifact-preview/` 只有 `bin/` 与 `lib/`，其顶层 `SKILL.md` 在上游导出包中
+即已缺失，不构成可加载的完整 Skill。
