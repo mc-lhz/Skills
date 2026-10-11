@@ -92,6 +92,6 @@
 
 - **坐标轴标签**：`tnum`（等宽数字）+ 数字右对齐。ECharts 默认没开。
 - **图例位置**：能省则省——直接把系列名写在线的末端（label at end of line），读者眼睛不用来回跳。
-- **色板与全站呼应**：图表颜色从 [SKILL.md](../../SKILL.md) 的整站 palette 派生（oklch 派生），不用 ECharts 默认 10 色轮盘（那套一眼 slop）。
+- **色板与全站呼应**：图表颜色从 [SUBSKILL.md](../../SUBSKILL.md) 的整站 palette 派生（oklch 派生），不用 ECharts 默认 10 色轮盘（那套一眼 slop）。
 - **网格线**：主网格 `#eeeeee` 或更淡，次网格不要。零轴用主文字色，其他坐标线 30–40% opacity。
 - **数据密度优先**：Tufte data-ink ratio——能删掉的边框、背景、装饰性网格全删。

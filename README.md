@@ -2,9 +2,9 @@
 
 Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按功能分域组织。
 
-**当前 64 个可加载技能**（`SKILL.md`），其中 8 个是把纯知识型子技能合并后的域根技能。
+**当前 60 个可加载技能**（`SKILL.md`），其中 9 个是把子技能合并后的域根技能。
 
-## 合并后的域根技能（8 个）
+## 合并后的域根技能（9 个）
 
 每个域根 `SKILL.md` 只写子技能索引与路径基准，子技能整体下沉到 `references/<子技能名>/`，
 入口文件为 `SUBSKILL.md`。这样宿主不会把子技能重复加载为独立技能。
@@ -17,10 +17,12 @@ Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按�
 | `legal/` | 6 | 合同起草/审查/修订、DPA、专利、合规评估 |
 | `marketing/` | 9 | 营销策划、电商提案、商品内容、选品、客服、舆情、Listing、跨境合规、素材审核 |
 | `medical/` | 7 | 患者咨询、临床决策、文献检索/解读/翻译/跟踪、报告解读 |
+| `office/` | 5 | PDF 处理、论文 DOCX 排版、单页 HTML、产物校验 CLI、Skill 创建 |
 | `product/` | 5 | 产品经理、产品分析、QA、用户研究、游戏策划 |
 | `data/` | 2 | 业务数据分析、可视化 |
 
-合并后全库 `SKILL.md` 由 106 降至 64。
+第二轮把办公相关技能（含 HTML 生成、产物检测，不含飞书/Lark 技能）并入 `office/`，
+`SKILL.md` 再降 4 个至 60。
 
 ## 合并范围与判定
 
@@ -38,9 +40,9 @@ Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按�
 | `lark/` | 20 | 依赖 `lark-cli`，且是产物载体 |
 | `platform-doubao/` | 15 | 依赖豆包私有工具，豆包外不可运行 |
 | `media/` | 7 | 依赖豆包生图/生视频/生音频工具 |
-| `documents/` | 2 | 产物载体 |
-| `tooling/` | 3 | CLI 封装或元技能 |
-| `web-dev/` | 2 | 产物载体 |
+| `documents/` | 0 | 已整体并入 `office/`，空目录删除 |
+| `tooling/` | 2 | CLI 封装或元技能（余下 `artifact-preview`、`doubao-pc-optimizer`） |
+| `web-dev/` | 1 | 产物载体（余下 `doubao-app-builder`，属全栈开发） |
 | `lifestyle/` | 1 | 自身已是多分支结构 |
 
 ## 两个独立保留的重资产
@@ -69,7 +71,7 @@ medical/
 整棵子树一起搬迁，解析基准未变，无需改写。域根 `SKILL.md` 用
 `<system-reminder>` 块把这条规则显式锁定，并规定从域根调用脚本时必须写完整前缀。
 
-## 合并时的三处连带修改
+## 合并时的连带修改
 
 1. **77 个 `SKILL.md` → `SUBSKILL.md`**（53 顶层 + 24 嵌套），并改写 90 个文件里 212 处引用。
    不改的话宿主会把子技能重复加载为独立技能。
@@ -77,6 +79,9 @@ medical/
    `path.join(bundleRoot, 'SKILL.md')`，已同步改为 `SUBSKILL.md`。
 3. **`finance/doubao-finance-model-builder`** 原引用 `sheet/SKILL.md`，已改为
    `lark/sheet/SUBSKILL.md`（含 `reading-manifest.json`、校验器与测试）。
+4. **第二轮 `office/`**：5 个顶层 `SKILL.md` 改名 `SUBSKILL.md`（无嵌套），并修复跨技能
+   引用——`README.md` 的 `tooling/verifier-hub` 路径、`skill-creator-for-work` 内
+   `pdf/scripts/...` 示例路径等。
 
 ## 已知问题
 
@@ -86,7 +91,7 @@ medical/
 
 ## 许可
 
-未统一授权。`byted-mediakit-*` 声明 MIT；`tooling/artifact-preview`、`tooling/verifier-hub`
+未统一授权。`byted-mediakit-*` 声明 MIT；`office/references/verifier-hub`
 声明 Proprietary — internal use only；其余多数未声明 license。作为公开仓库前需确认。
 
 ## 已知缺失

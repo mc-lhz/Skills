@@ -4,7 +4,7 @@ This document contains advanced PDF processing features, detailed examples, and 
 
 ## PyMuPDF Advanced Extraction
 
-Use PyMuPDF as the primary library for existing PDFs. See [SKILL.md](SKILL.md) for the standard text, rendering, merge, split, and rotation workflows.
+Use PyMuPDF as the primary library for existing PDFs. See [SUBSKILL.md](SUBSKILL.md) for the standard text, rendering, merge, split, and rotation workflows.
 
 ### Extract Structured Text with Coordinates
 ```python

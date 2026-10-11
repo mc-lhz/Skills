@@ -110,8 +110,8 @@ This is a placeholder script that can be executed directly.
 Replace with actual implementation or delete if not needed.
 
 Example real scripts from other skills:
-- pdf/scripts/fill_fillable_fields.py - Fills PDF form fields
-- pdf/scripts/convert_pdf_to_images.py - Converts PDF pages to images
+- office/references/pdf/scripts/fill_fillable_fields.py - Fills PDF form fields
+- office/references/pdf/scripts/convert_pdf_to_images.py - Converts PDF pages to images
 """
 
 def main():

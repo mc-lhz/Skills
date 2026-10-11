@@ -90,7 +90,7 @@ page.insert_image(
 ```
 
 For page-level operations such as merge, split, rotate, crop, watermarks,
-metadata, or encryption, follow the relevant guidance in [SKILL.md](SKILL.md).
+metadata, or encryption, follow the relevant guidance in [SUBSKILL.md](SUBSKILL.md).
 
 ## Annotation Editing
 
@@ -150,7 +150,7 @@ vector outlines.
 - If localized editing cannot meet the requested quality, explain the limitation
   before rebuilding the affected page or document.
 
-Read [SKILL.md](SKILL.md) for scanned-PDF rendering guidance.
+Read [SUBSKILL.md](SUBSKILL.md) for scanned-PDF rendering guidance.
 
 ## Save and Verify
 
@@ -166,6 +166,6 @@ Before reporting completion, confirm that:
 - no target content remains visible when removal was requested;
 - changed pages pass rendered visual inspection.
 
-Use the ReportLab guidance in [SKILL.md](SKILL.md) only when the user requests a
+Use the ReportLab guidance in [SUBSKILL.md](SUBSKILL.md) only when the user requests a
 new PDF or when direct editing cannot satisfy the requested layout. Use [reference.md](reference.md)
 for advanced extraction, repair, JavaScript libraries, and troubleshooting.
