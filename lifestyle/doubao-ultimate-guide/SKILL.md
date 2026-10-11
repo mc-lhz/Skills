@@ -19,7 +19,7 @@ description: 统一攻略创作总控 Skill：根据用户需求路由到旅游�
 四个分支目录是能力来源，不在总控层重写其专业规则：
 
 ```text
-branches/
+references/
 ├── travel-planner-pro/
 ├── fitness-planner-pro/
 ├── cooking-tutorial/
@@ -84,7 +84,7 @@ branches/
 
 ### 旅游攻略分支
 
-使用 `branches/travel-planner-pro/`。
+使用 `references/travel-planner-pro/`。
 
 触发信号：
 
@@ -98,7 +98,7 @@ branches/
 
 分支入口：
 
-- `branches/travel-planner-pro/SKILL.md`
+- `references/travel-planner-pro/SUBSKILL.md`
 
 读取策略：
 
@@ -109,7 +109,7 @@ branches/
 
 ### 健身攻略分支
 
-使用 `branches/fitness-planner-pro/`。
+使用 `references/fitness-planner-pro/`。
 
 触发信号：
 
@@ -123,7 +123,7 @@ branches/
 
 分支入口：
 
-- `branches/fitness-planner-pro/SKILL.md`
+- `references/fitness-planner-pro/SUBSKILL.md`
 
 读取策略：
 
@@ -134,7 +134,7 @@ branches/
 
 ### 美食烹饪分支
 
-使用 `branches/cooking-tutorial/`。
+使用 `references/cooking-tutorial/`。
 
 触发信号：
 
@@ -148,7 +148,7 @@ branches/
 
 分支入口：
 
-- `branches/cooking-tutorial/SKILL.md`
+- `references/cooking-tutorial/SUBSKILL.md`
 
 读取策略：
 
@@ -158,7 +158,7 @@ branches/
 
 ### 游戏攻略分支
 
-使用 `branches/game-guide/`。
+使用 `references/game-guide/`。
 
 触发信号：
 
@@ -173,7 +173,7 @@ branches/
 
 分支入口：
 
-- `branches/game-guide/SKILL.md`
+- `references/game-guide/SUBSKILL.md`
 
 读取策略：
 
@@ -315,7 +315,7 @@ branches/
 创建成功后，读取主分支：
 
 ```text
-branches/{selected-branch}/SKILL.md
+references/{selected-branch}/SUBSKILL.md
 ```
 
 并按分支说明读取必要 reference。读取分支时始终附加本模式：

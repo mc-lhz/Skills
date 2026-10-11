@@ -2,9 +2,9 @@
 
 Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按功能分域组织。
 
-**当前 60 个可加载技能**（`SKILL.md`），其中 9 个是把子技能合并后的域根技能。
+**当前 56 个可加载技能**（`SKILL.md`），其中 10 个是把子技能合并后的域根技能。
 
-## 合并后的域根技能（9 个）
+## 合并后的域根技能（10 个）
 
 每个域根 `SKILL.md` 只写子技能索引与路径基准，子技能整体下沉到 `references/<子技能名>/`，
 入口文件为 `SUBSKILL.md`。这样宿主不会把子技能重复加载为独立技能。
@@ -20,6 +20,10 @@ Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按�
 | `office/` | 5 | PDF 处理、论文 DOCX 排版、单页 HTML、产物校验 CLI、Skill 创建 |
 | `product/` | 5 | 产品经理、产品分析、QA、用户研究、游戏策划 |
 | `data/` | 2 | 业务数据分析、可视化 |
+| `lifestyle/doubao-ultimate-guide/` | 4 | 旅游攻略、健身攻略、美食烹饪、游戏攻略（四合一总控） |
+
+第三轮把 `lifestyle/doubao-ultimate-guide` 原先留在 `branches/` 的 4 个分支收敛到
+`references/<分支名>/` 并改名为 `SUBSKILL.md`，`SKILL.md` 再降 4 个至 56。
 
 第二轮把办公相关技能（含 HTML 生成、产物检测，不含飞书/Lark 技能）并入 `office/`，
 `SKILL.md` 再降 4 个至 60。
@@ -43,7 +47,6 @@ Agent Skill 集合。多数源自豆包（ByteDance）办公环境导出，按�
 | `documents/` | 0 | 已整体并入 `office/`，空目录删除 |
 | `tooling/` | 2 | CLI 封装或元技能（余下 `artifact-preview`、`doubao-pc-optimizer`） |
 | `web-dev/` | 1 | 产物载体（余下 `doubao-app-builder`，属全栈开发） |
-| `lifestyle/` | 1 | 自身已是多分支结构 |
 
 ## 两个独立保留的重资产
 
@@ -82,6 +85,10 @@ medical/
 4. **第二轮 `office/`**：5 个顶层 `SKILL.md` 改名 `SUBSKILL.md`（无嵌套），并修复跨技能
    引用——`README.md` 的 `tooling/verifier-hub` 路径、`skill-creator-for-work` 内
    `pdf/scripts/...` 示例路径等。
+5. **第三轮 `lifestyle/`**：`branches/` 下 4 个分支的顶层 `SKILL.md` 改名 `SUBSKILL.md`，
+   域根 `SKILL.md` 里 `branches/<名>/SKILL.md` 与 `branches/{selected-branch}/SKILL.md`
+   模板路径改写为 `references/.../SUBSKILL.md`（10 处）。分支间无交叉引用，
+   `../` 仅出现在 URL 与输出路径中，故子树搬迁不产生断链。
 
 ## 已知问题
 
