@@ -18,9 +18,9 @@ SPEC.loader.exec_module(MODULE)
 
 def external_entry(path: str) -> dict:
     return {
-        "name": "lark/sheet",
+        "name": "office/references/word-ppt-sheet/sheet",
         "path": path,
-        "resolved_path": f"/installed/lark/sheet/{path}",
+        "resolved_path": f"/installed/office/references/word-ppt-sheet/sheet/{path}",
         "total_lines": 150,
         "chunks_read": [[1, 100], [101, 150]],
         "end_marker_found": False,
@@ -41,7 +41,7 @@ class ReadingIntegrityTests(unittest.TestCase):
     def test_complete_lark_reading_passes(self) -> None:
         result = self.validate(
             [
-                external_entry("SKILL.md"),
+                external_entry("SUBSKILL.md"),
                 external_entry("references/ref-financial-modeling-standards"),
             ]
         )
@@ -52,17 +52,17 @@ class ReadingIntegrityTests(unittest.TestCase):
             [external_entry("references/ref-financial-modeling-standards")]
         )
         self.assertEqual(result["status"], "INCOMPLETE")
-        self.assertTrue(any("lark/sheet/SUBSKILL.md" in item for item in result["errors"]))
+        self.assertTrue(any("office/references/word-ppt-sheet/sheet/SUBSKILL.md" in item for item in result["errors"]))
 
     def test_missing_financial_standard_blocks_g0_input(self) -> None:
-        result = self.validate([external_entry("SKILL.md")])
+        result = self.validate([external_entry("SUBSKILL.md")])
         self.assertEqual(result["status"], "INCOMPLETE")
         self.assertTrue(
             any("ref-financial-modeling-standards" in item for item in result["errors"])
         )
 
     def test_gapped_chunks_are_incomplete(self) -> None:
-        skill = external_entry("SKILL.md")
+        skill = external_entry("SUBSKILL.md")
         skill["chunks_read"] = [[1, 99], [101, 150]]
         result = self.validate(
             [skill, external_entry("references/ref-financial-modeling-standards")]
@@ -70,7 +70,7 @@ class ReadingIntegrityTests(unittest.TestCase):
         self.assertEqual(result["status"], "INCOMPLETE")
 
     def test_duplicate_external_record_is_incomplete(self) -> None:
-        skill = external_entry("SKILL.md")
+        skill = external_entry("SUBSKILL.md")
         result = self.validate(
             [
                 skill,

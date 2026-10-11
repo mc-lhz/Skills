@@ -105,9 +105,10 @@ def validate(skill_root: Path, ledger_path: Path) -> dict[str, Any]:
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     chunk_lines = int(manifest.get("chunk_lines", 100))
     declared = flatten_manifest(manifest)
+    # 统一用 POSIX 分隔符，使 manifest 声明与磁盘枚举在 Windows / POSIX 下一致
     markdown_files = sorted(
-        ["SKILL.md"]
-        + [str(path.relative_to(root)) for path in (root / "references").glob("*.md")]
+        ["SUBSKILL.md"]
+        + [path.relative_to(root).as_posix() for path in (root / "references").glob("*.md")]
     )
 
     checks = []

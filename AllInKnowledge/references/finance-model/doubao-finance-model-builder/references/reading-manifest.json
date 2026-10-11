@@ -3,7 +3,7 @@
   "chunk_lines": 100,
   "completion_marker_template": "<!-- END OF FILE: {basename} -->",
   "always": [
-    "SKILL.md",
+    "SUBSKILL.md",
     "references/model-and-artifact-controls.md",
     "references/source-tool-priority.md"
   ],
@@ -19,11 +19,11 @@
     "external_required": {
       "financial_spreadsheet": [
         {
-          "skill": "lark/sheet",
+          "skill": "office/references/word-ppt-sheet/sheet",
           "path": "SUBSKILL.md"
         },
         {
-          "skill": "lark/sheet",
+          "skill": "office/references/word-ppt-sheet/sheet",
           "path": "references/ref-financial-modeling-standards"
         }
       ]
